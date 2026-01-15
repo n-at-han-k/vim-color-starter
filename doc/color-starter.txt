@@ -1,0 +1,41 @@
+*color-starter.txt*  A minimal ANSI terminal colorscheme
+
+Author:  Nathan
+License: MIT
+
+INTRODUCTION                                    *color-starter* *vim-color-starter*
+
+A colorscheme starter template.
+
+USAGE                                           *color-starter-usage*
+
+Enable the colorscheme: >
+    colorscheme color-starter
+<
+
+ANSI COLOR MAPPING                              *color-starter-colors*
+
+The colorscheme uses these ANSI color indices:
+>
+    0: Black            8: Bright Black (dark gray)
+    1: Red              9: Bright Red
+    2: Green           10: Bright Green
+    3: Yellow          11: Bright Yellow
+    4: Blue            12: Bright Blue
+    5: Magenta         13: Bright Magenta
+    6: Cyan            14: Bright Cyan
+    7: White (gray)    15: Bright White
+<
+
+REQUIREMENTS                                    *color-starter-requirements*
+
+- Terminal with ANSI color support
+- 'termguicolors' must be off (set automatically)
+
+NOTES                                           *color-starter-notes*
+
+- Works best with standard ANSI color palettes
+- Non-standard schemes (e.g. base16) may look odd
+- Neovim-specific groups are conditionally applied
+
+ vim:tw=78:ts=8:ft=help:norl:
