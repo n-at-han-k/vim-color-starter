@@ -8,7 +8,11 @@ set background=dark
 
 let g:colors_name = 'starter-dark'
 
-set termguicolors
+if get(g:, 'use_native_terminal_colors', 0)
+  set notermguicolors
+else
+  set termguicolors
+endif
 
 let s:colorMap = {
   \ 'Black':         '#000000',
