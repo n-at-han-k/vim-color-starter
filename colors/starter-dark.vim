@@ -1,10 +1,3 @@
-" starter-dark.vim - A dark starter colorscheme
-"
-" Colormap options:
-"   gruvbox_light, solarized_light,
-"   tango, gruvbox_dark, solarized_dark, nord, dracula,
-"   tokyo_night, catppuccin_mocha, one_dark, dark, light
-
 hi clear
 
 if exists('syntax_on')
@@ -17,151 +10,217 @@ let g:colors_name = 'starter-dark'
 
 set termguicolors
 
-let s:selectedColorMap = 'dark'
+let s:colorMap = {
+  \ 'Black':         '#000000',
+  \ 'Red':           '#cc0000',
+  \ 'Green':         '#4e9a06',
+  \ 'Yellow':        '#c4a000',
+  \ 'Blue':          '#3465a4',
+  \ 'Magenta':       '#75507b',
+  \ 'Cyan':          '#06989a',
+  \ 'White':         '#d3d7cf',
+  \ 'BrightBlack':   '#555753',
+  \ 'BrightRed':     '#ef2929',
+  \ 'BrightGreen':   '#8ae234',
+  \ 'BrightYellow':  '#fce94f',
+  \ 'BrightBlue':    '#729fcf',
+  \ 'BrightMagenta': '#ad7fa8',
+  \ 'BrightCyan':    '#34e2e2',
+  \ 'BrightWhite':   '#eeeeec',
+  \ }
 
-let s:c = starter#colors#load(s:selectedColorMap)
+let s:Black         = {'cterm': 0,      'gui': s:colorMap['Black'],         'name': 'Black'}
+let s:Red           = {'cterm': 1,      'gui': s:colorMap['Red'],           'name': 'Red'}
+let s:Green         = {'cterm': 2,      'gui': s:colorMap['Green'],         'name': 'Green'}
+let s:Yellow        = {'cterm': 3,      'gui': s:colorMap['Yellow'],        'name': 'Yellow'}
+let s:Blue          = {'cterm': 4,      'gui': s:colorMap['Blue'],          'name': 'Blue'}
+let s:Magenta       = {'cterm': 5,      'gui': s:colorMap['Magenta'],       'name': 'Magenta'}
+let s:Cyan          = {'cterm': 6,      'gui': s:colorMap['Cyan'],          'name': 'Cyan'}
+let s:White         = {'cterm': 7,      'gui': s:colorMap['White'],         'name': 'White'}
+let s:BrightBlack   = {'cterm': 8,      'gui': s:colorMap['BrightBlack'],   'name': 'Bright Black'}
+let s:BrightRed     = {'cterm': 9,      'gui': s:colorMap['BrightRed'],     'name': 'Bright Red'}
+let s:BrightGreen   = {'cterm': 10,     'gui': s:colorMap['BrightGreen'],   'name': 'Bright Green'}
+let s:BrightYellow  = {'cterm': 11,     'gui': s:colorMap['BrightYellow'],  'name': 'Bright Yellow'}
+let s:BrightBlue    = {'cterm': 12,     'gui': s:colorMap['BrightBlue'],    'name': 'Bright Blue'}
+let s:BrightMagenta = {'cterm': 13,     'gui': s:colorMap['BrightMagenta'], 'name': 'Bright Magenta'}
+let s:BrightCyan    = {'cterm': 14,     'gui': s:colorMap['BrightCyan'],    'name': 'Bright Cyan'}
+let s:BrightWhite   = {'cterm': 15,     'gui': s:colorMap['BrightWhite'],   'name': 'Bright White'}
+let s:NONE          = {'cterm': 'NONE', 'gui': 'NONE',                     'name': 'NONE'}
+
+function! s:colorFor(group, fg, bg, style, ...) abort
+
+  " Some groups get a special/undercurl color, some don't.
+  " Therefore, the 5th argument is optional.
+  "
+  " Defaults to 'NONE' when not provided.
+  "
+  " Groups which use the 5th argument include:
+  "   - SpellBad
+  "   - SpellCap
+  "   - ...
+  "
+  if a:0 >= 1
+    let l:ctermul = a:1.cterm
+    let l:guisp = a:1.gui
+  else
+    let l:ctermul = 'NONE'
+    let l:guisp = 'NONE'
+  endif
+
+  execute 'hi ' . a:group
+    \ . ' term=' . a:style
+    \ . ' cterm=' . a:style
+    \ . ' ctermfg=' . a:fg.cterm
+    \ . ' ctermbg=' . a:bg.cterm
+    \ . ' ctermul=' . l:ctermul
+    \ . ' ctermfont=NONE'
+    \ . ' gui=' . a:style
+    \ . ' guifg=' . a:fg.gui
+    \ . ' guibg=' . a:bg.gui
+    \ . ' guisp=' . l:guisp
+endfunction
 
 " Editor Elements
-call starter#colors#hi('Normal',            s:c.White,         s:c.Black,        'none')        " Normal text
-call starter#colors#hi('NonText',           s:c.Black,         s:c.NONE,         'none')        " Characters that don't exist in the text (e.g. '~' after end of buffer)
-call starter#colors#hi('EndOfBuffer',       s:c.Black,         s:c.NONE,         'none')        " Filler lines (~) after the last line in the buffer
-call starter#colors#hi('Ignore',            s:c.NONE,          s:c.NONE,         'none')        " Left blank, hidden
-call starter#colors#hi('Underlined',        s:c.NONE,          s:c.NONE,         'underline')   " Text that stands out, HTML links
-call starter#colors#hi('Bold',              s:c.NONE,          s:c.NONE,         'bold')        " Bold text (in markup)
-call starter#colors#hi('Italic',            s:c.NONE,          s:c.NONE,         'italic')      " Italic text (in markup)
-call starter#colors#hi('StatusLine',        s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Status line of current window
-call starter#colors#hi('StatusLineNC',      s:c.BrightWhite,   s:c.Black,        'none')        " Status lines of non-current windows
-call starter#colors#hi('StatusLineTerm',    s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Status line of current terminal window
-call starter#colors#hi('StatusLineTermNC',  s:c.BrightWhite,   s:c.Black,        'none')        " Status lines of non-current terminal windows
-call starter#colors#hi('VertSplit',         s:c.BrightBlack,   s:c.NONE,         'none')        " Column separating vertically split windows
-call starter#colors#hi('TabLine',           s:c.White,         s:c.Black,        'none')        " Tab pages line, not active tab page label
-call starter#colors#hi('TabLineFill',       s:c.Black,         s:c.NONE,         'none')        " Tab pages line, where there are no labels
-call starter#colors#hi('TabLineSel',        s:c.Black,         s:c.BrightYellow, 'none')        " Tab pages line, active tab page label
-call starter#colors#hi('TabPanel',          s:c.White,         s:c.Black,        'none')        " TabPanel, not active tab page label
-call starter#colors#hi('TabPanelFill',      s:c.Black,         s:c.NONE,         'none')        " TabPanel, where there are no labels
-call starter#colors#hi('TabPanelSel',       s:c.Black,         s:c.BrightYellow, 'none')        " TabPanel, active tab page label
-call starter#colors#hi('Terminal',          s:c.NONE,          s:c.NONE,         'none')        " Terminal window
-call starter#colors#hi('Title',             s:c.Blue,          s:c.NONE,         'bold')        " Titles for output from :set all, :autocmd, etc.
-call starter#colors#hi('CursorLine',        s:c.NONE,          s:c.Black,        'none')        " Screen line the cursor is on (when 'cursorline' is set)
-call starter#colors#hi('Cursor',            s:c.Black,         s:c.BrightWhite,  'none')        " Character under the cursor
-call starter#colors#hi('lCursor',           s:c.Black,         s:c.BrightWhite,  'none')        " Character under cursor when language-mapping is used
-call starter#colors#hi('CursorIM',          s:c.Black,         s:c.BrightWhite,  'none')        " Cursor in IME mode
-call starter#colors#hi('CursorColumn',      s:c.NONE,          s:c.Black,        'none')        " Screen column the cursor is in (when 'cursorcolumn' is set)
-call starter#colors#hi('LineNr',            s:c.BrightBlack,   s:c.NONE,         'none')        " Line number for :number and :# commands
-call starter#colors#hi('LineNrAbove',       s:c.BrightBlack,   s:c.NONE,         'none')        " Line number above cursor (relativenumber)
-call starter#colors#hi('LineNrBelow',       s:c.BrightBlack,   s:c.NONE,         'none')        " Line number below cursor (relativenumber)
-call starter#colors#hi('CursorLineNr',      s:c.Cyan,          s:c.NONE,         'none')        " Line number when 'cursorline' is set
-call starter#colors#hi('CursorLineFold',    s:c.White,         s:c.Black,        'none')        " FoldColumn when 'cursorline' is set for cursor line
-call starter#colors#hi('CursorLineSign',    s:c.White,         s:c.Black,        'none')        " SignColumn when 'cursorline' is set for cursor line
-call starter#colors#hi('helpLeadBlank',     s:c.NONE,          s:c.NONE,         'none')        " Leading blank in help files
-call starter#colors#hi('helpNormal',        s:c.NONE,          s:c.NONE,         'none')        " Normal text in help files
-call starter#colors#hi('Visual',            s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Visual mode selection
-call starter#colors#hi('VisualNOS',         s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Visual mode selection when vim is "Not Owning the Selection"
-call starter#colors#hi('Pmenu',             s:c.BrightWhite,   s:c.Black,        'none')        " Popup menu: normal item
-call starter#colors#hi('PmenuSbar',         s:c.White,         s:c.BrightBlack,  'none')        " Popup menu: scrollbar
-call starter#colors#hi('PmenuSel',          s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Popup menu: selected item
-call starter#colors#hi('PmenuThumb',        s:c.NONE,          s:c.White,        'none')        " Popup menu: scrollbar thumb
-call starter#colors#hi('PmenuKind',         s:c.BrightCyan,    s:c.Black,        'none')        " Popup menu: normal item "kind"
-call starter#colors#hi('PmenuKindSel',      s:c.BrightCyan,    s:c.BrightBlack,  'bold')        " Popup menu: selected item "kind"
-call starter#colors#hi('PmenuExtra',        s:c.BrightBlack,   s:c.Black,        'none')        " Popup menu: normal item "extra text"
-call starter#colors#hi('PmenuExtraSel',     s:c.White,         s:c.BrightBlack,  'bold')        " Popup menu: selected item "extra text"
-call starter#colors#hi('PmenuMatch',        s:c.BrightYellow,  s:c.Black,        'none')        " Popup menu: matched text in normal item
-call starter#colors#hi('PmenuMatchSel',     s:c.BrightYellow,  s:c.BrightBlack,  'bold')        " Popup menu: matched text in selected item
-call starter#colors#hi('PmenuBorder',       s:c.White,         s:c.Black,        'none')        " Popup menu: border characters
-call starter#colors#hi('PmenuShadow',       s:c.NONE,          s:c.Black,        'none')        " Popup menu: shadow
-call starter#colors#hi('ComplMatchIns',     s:c.BrightYellow,  s:c.NONE,         'underline')   " Matched text of the currently inserted completion
-call starter#colors#hi('PreInsert',         s:c.BrightBlack,   s:c.NONE,         'none')        " Text inserted when "preinsert" is in 'completeopt'
-call starter#colors#hi('PopupSelected',     s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Popup window created with popup_menu()
-call starter#colors#hi('PopupNotification', s:c.BrightYellow,  s:c.NONE,         'none')        " Popup window created with popup_notification()
-call starter#colors#hi('FoldColumn',        s:c.White,         s:c.NONE,         'none')        " 'foldcolumn' indicator column
-call starter#colors#hi('Folded',            s:c.BrightBlue,    s:c.NONE,         'none')        " Line used for closed folds
-call starter#colors#hi('WildMenu',          s:c.BrightWhite,   s:c.Black,        'none')        " Current match in 'wildmenu' completion
-call starter#colors#hi('SpecialKey',        s:c.Black,         s:c.NONE,         'none')        " Unprintable characters: text displayed differently from what it is
-call starter#colors#hi('IncSearch',         s:c.Black,         s:c.Red,          'none')        " 'incsearch' highlighting; also for replaced text with :s///c
-call starter#colors#hi('CurSearch',         s:c.Black,         s:c.Yellow,       'none')        " Current search match under cursor
-call starter#colors#hi('Search',            s:c.Black,         s:c.BrightYellow, 'none')        " Last search pattern highlighting
-call starter#colors#hi('Directory',         s:c.NONE,          s:c.NONE,         'none')        " Directory names in listings and other special names
-call starter#colors#hi('MatchParen',        s:c.Yellow,        s:c.Black,        'underline')   " Matching parenthesis/bracket under cursor and its match
-call starter#colors#hi('MessageWindow',     s:c.BrightYellow,  s:c.NONE,         'none')        " Messages popup window used by :echowindow
-call starter#colors#hi('ModeMsg',           s:c.Black,         s:c.BrightWhite,  'bold')        " 'showmode' message (e.g. -- INSERT --)
-call starter#colors#hi('MsgArea',           s:c.NONE,          s:c.NONE,         'none')        " Command-line area
-call starter#colors#hi('MoreMsg',           s:c.Blue,          s:c.NONE,         'none')        " 'more-prompt' (-- More --)
-call starter#colors#hi('Question',          s:c.Blue,          s:c.NONE,         'none')        " Hit-enter prompt and yes/no questions
-call starter#colors#hi('ColorColumn',       s:c.NONE,          s:c.NONE,         'none')        " Columns set with 'colorcolumn'
-call starter#colors#hi('SignColumn',        s:c.White,         s:c.NONE,         'none')        " Column where signs are displayed
-call starter#colors#hi('QuickFixLine',      s:c.BrightCyan,    s:c.Black,        'none')        " Current quickfix item in the quickfix window
-call starter#colors#hi('Conceal',           s:c.BrightBlack,   s:c.NONE,         'none')        " Placeholder characters for concealed text
-call starter#colors#hi('ToolbarLine',       s:c.BrightWhite,   s:c.Black,        'none')        " Toolbar background
-call starter#colors#hi('ToolbarButton',     s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Toolbar buttons
-call starter#colors#hi('debugPC',           s:c.White,         s:c.NONE,         'none')        " Current line in :terminal debugger
-call starter#colors#hi('debugBreakpoint',   s:c.BrightBlack,   s:c.NONE,         'none')        " Breakpoint marker in :terminal debugger
-call starter#colors#hi('ErrorMsg',          s:c.Red,           s:c.NONE,         'bold,italic') " Error messages on the command line
-call starter#colors#hi('WarningMsg',        s:c.BrightYellow,  s:c.NONE,         'none')        " Warning messages
-call starter#colors#hi('DiffAdd',           s:c.Black,         s:c.BrightGreen,  'none')        " Diff mode: added line
-call starter#colors#hi('DiffChange',        s:c.Black,         s:c.BrightBlue,   'none')        " Diff mode: changed line
-call starter#colors#hi('DiffDelete',        s:c.Black,         s:c.BrightRed,    'none')        " Diff mode: deleted line
-call starter#colors#hi('DiffText',          s:c.Black,         s:c.BrightCyan,   'none')        " Diff mode: changed text within a changed line
-call starter#colors#hi('DiffTextAdd',       s:c.Black,         s:c.BrightCyan,   'none')        " Diff mode: added text within a changed line
-call starter#colors#hi('diffAdded',         s:c.BrightGreen,   s:c.NONE,         'none')        " Diff syntax: added line
-call starter#colors#hi('diffRemoved',       s:c.BrightRed,     s:c.NONE,         'none')        " Diff syntax: removed line
-call starter#colors#hi('diffChanged',       s:c.BrightBlue,    s:c.NONE,         'none')        " Diff syntax: changed line
-call starter#colors#hi('diffOldFile',       s:c.BrightYellow,  s:c.NONE,         'none')        " Diff syntax: old file name
-call starter#colors#hi('diffNewFile',       s:c.BrightMagenta, s:c.NONE,         'none')        " Diff syntax: new file name
-call starter#colors#hi('diffFile',          s:c.BrightBlue,    s:c.NONE,         'none')        " Diff syntax: file header
-call starter#colors#hi('diffLine',          s:c.White,         s:c.NONE,         'none')        " Diff syntax: line info (@@...@@)
-call starter#colors#hi('diffIndexLine',     s:c.BrightCyan,    s:c.NONE,         'none')        " Diff syntax: index line
-call starter#colors#hi('healthError',       s:c.Red,           s:c.NONE,         'none')        " :checkhealth error
-call starter#colors#hi('healthSuccess',     s:c.Green,         s:c.NONE,         'none')        " :checkhealth success
-call starter#colors#hi('healthWarning',     s:c.Yellow,        s:c.NONE,         'none')        " :checkhealth warning
+call s:colorFor('Normal',            s:White,                s:Black,               'none')     " Normal text
+call s:colorFor('NonText',           s:Black,                s:NONE,                'none')     " Characters that don't exist in the text (e.g. '~' after end of buffer)
+call s:colorFor('EndOfBuffer',       s:Black,                s:NONE,                'none')     " Filler lines (~) after the last line in the buffer
+call s:colorFor('Ignore',            s:NONE,                 s:NONE,                'none')     " Left blank, hidden
+call s:colorFor('Underlined',        s:NONE,                 s:NONE,                'underline')" Text that stands out, HTML links
+call s:colorFor('Bold',              s:NONE,                 s:NONE,                'bold')     " Bold text (in markup)
+call s:colorFor('Italic',            s:NONE,                 s:NONE,                'italic')   " Italic text (in markup)
+call s:colorFor('StatusLine',        s:BrightWhite,          s:BrightBlack,         'none')     " Status line of current window
+call s:colorFor('StatusLineNC',      s:BrightWhite,          s:Black,               'none')     " Status lines of non-current windows
+call s:colorFor('StatusLineTerm',    s:BrightWhite,          s:BrightBlack,         'none')     " Status line of current terminal window
+call s:colorFor('StatusLineTermNC',  s:BrightWhite,          s:Black,               'none')     " Status lines of non-current terminal windows
+call s:colorFor('VertSplit',         s:BrightBlack,          s:NONE,                'none')     " Column separating vertically split windows
+call s:colorFor('TabLine',           s:White,                s:Black,               'none')     " Tab pages line, not active tab page label
+call s:colorFor('TabLineFill',       s:Black,                s:NONE,                'none')     " Tab pages line, where there are no labels
+call s:colorFor('TabLineSel',        s:Black,                s:BrightYellow,        'none')     " Tab pages line, active tab page label
+call s:colorFor('TabPanel',          s:White,                s:Black,               'none')     " TabPanel, not active tab page label
+call s:colorFor('TabPanelFill',      s:Black,                s:NONE,                'none')     " TabPanel, where there are no labels
+call s:colorFor('TabPanelSel',       s:Black,                s:BrightYellow,        'none')     " TabPanel, active tab page label
+call s:colorFor('Terminal',          s:NONE,                 s:NONE,                'none')     " Terminal window
+call s:colorFor('Title',             s:Blue,                 s:NONE,                'bold')     " Titles for output from :set all, :autocmd, etc.
+call s:colorFor('CursorLine',        s:NONE,                 s:Black,               'none')     " Screen line the cursor is on (when 'cursorline' is set)
+call s:colorFor('Cursor',            s:Black,                s:BrightWhite,         'none')     " Character under the cursor
+call s:colorFor('lCursor',           s:Black,                s:BrightWhite,         'none')     " Character under cursor when language-mapping is used
+call s:colorFor('CursorIM',          s:Black,                s:BrightWhite,         'none')     " Cursor in IME mode
+call s:colorFor('CursorColumn',      s:NONE,                 s:Black,               'none')     " Screen column the cursor is in (when 'cursorcolumn' is set)
+call s:colorFor('LineNr',            s:BrightBlack,          s:NONE,                'none')     " Line number for :number and :# commands
+call s:colorFor('LineNrAbove',       s:BrightBlack,          s:NONE,                'none')     " Line number above cursor (relativenumber)
+call s:colorFor('LineNrBelow',       s:BrightBlack,          s:NONE,                'none')     " Line number below cursor (relativenumber)
+call s:colorFor('CursorLineNr',      s:Cyan,                 s:NONE,                'none')     " Line number when 'cursorline' is set
+call s:colorFor('CursorLineFold',    s:White,                s:Black,               'none')     " FoldColumn when 'cursorline' is set for cursor line
+call s:colorFor('CursorLineSign',    s:White,                s:Black,               'none')     " SignColumn when 'cursorline' is set for cursor line
+call s:colorFor('helpLeadBlank',     s:NONE,                 s:NONE,                'none')     " Leading blank in help files
+call s:colorFor('helpNormal',        s:NONE,                 s:NONE,                'none')     " Normal text in help files
+call s:colorFor('Visual',            s:BrightWhite,          s:BrightBlack,         'bold')     " Visual mode selection
+call s:colorFor('VisualNOS',         s:BrightWhite,          s:BrightBlack,         'bold')     " Visual mode selection when vim is "Not Owning the Selection"
+call s:colorFor('Pmenu',             s:BrightWhite,          s:Black,               'none')     " Popup menu: normal item
+call s:colorFor('PmenuSbar',         s:White,                s:BrightBlack,         'none')     " Popup menu: scrollbar
+call s:colorFor('PmenuSel',          s:BrightWhite,          s:BrightBlack,         'bold')     " Popup menu: selected item
+call s:colorFor('PmenuThumb',        s:NONE,                 s:White,               'none')     " Popup menu: scrollbar thumb
+call s:colorFor('PmenuKind',         s:BrightCyan,           s:Black,               'none')     " Popup menu: normal item "kind"
+call s:colorFor('PmenuKindSel',      s:BrightCyan,           s:BrightBlack,         'bold')     " Popup menu: selected item "kind"
+call s:colorFor('PmenuExtra',        s:BrightBlack,          s:Black,               'none')     " Popup menu: normal item "extra text"
+call s:colorFor('PmenuExtraSel',     s:White,                s:BrightBlack,         'bold')     " Popup menu: selected item "extra text"
+call s:colorFor('PmenuMatch',        s:BrightYellow,         s:Black,               'none')     " Popup menu: matched text in normal item
+call s:colorFor('PmenuMatchSel',     s:BrightYellow,         s:BrightBlack,         'bold')     " Popup menu: matched text in selected item
+call s:colorFor('PmenuBorder',       s:White,                s:Black,               'none')     " Popup menu: border characters
+call s:colorFor('PmenuShadow',       s:NONE,                 s:Black,               'none')     " Popup menu: shadow
+call s:colorFor('ComplMatchIns',     s:BrightYellow,         s:NONE,                'underline')" Matched text of the currently inserted completion
+call s:colorFor('PreInsert',         s:BrightBlack,          s:NONE,                'none')     " Text inserted when "preinsert" is in 'completeopt'
+call s:colorFor('PopupSelected',     s:BrightWhite,          s:BrightBlack,         'bold')     " Popup window created with popup_menu()
+call s:colorFor('PopupNotification', s:BrightYellow,         s:NONE,                'none')     " Popup window created with popup_notification()
+call s:colorFor('FoldColumn',        s:White,                s:NONE,                'none')     " 'foldcolumn' indicator column
+call s:colorFor('Folded',            s:BrightBlue,           s:NONE,                'none')     " Line used for closed folds
+call s:colorFor('WildMenu',          s:BrightWhite,          s:Black,               'none')     " Current match in 'wildmenu' completion
+call s:colorFor('SpecialKey',        s:Black,                s:NONE,                'none')     " Unprintable characters: text displayed differently from what it is
+call s:colorFor('IncSearch',         s:Black,                s:Red,                 'none')     " 'incsearch' highlighting; also for replaced text with :s///c
+call s:colorFor('CurSearch',         s:Black,                s:Yellow,              'none')     " Current search match under cursor
+call s:colorFor('Search',            s:Black,                s:BrightYellow,        'none')     " Last search pattern highlighting
+call s:colorFor('Directory',         s:NONE,                 s:NONE,                'none')     " Directory names in listings and other special names
+call s:colorFor('MatchParen',        s:Yellow,               s:Black,               'underline')" Matching parenthesis/bracket under cursor and its match
+call s:colorFor('MessageWindow',     s:BrightYellow,         s:NONE,                'none')     " Messages popup window used by :echowindow
+call s:colorFor('ModeMsg',           s:Black,                s:BrightWhite,         'bold')     " 'showmode' message (e.g. -- INSERT --)
+call s:colorFor('MsgArea',           s:NONE,                 s:NONE,                'none')     " Command-line area
+call s:colorFor('MoreMsg',           s:Blue,                 s:NONE,                'none')     " 'more-prompt' (-- More --)
+call s:colorFor('Question',          s:Blue,                 s:NONE,                'none')     " Hit-enter prompt and yes/no questions
+call s:colorFor('ColorColumn',       s:NONE,                 s:NONE,                'none')     " Columns set with 'colorcolumn'
+call s:colorFor('SignColumn',        s:White,                s:NONE,                'none')     " Column where signs are displayed
+call s:colorFor('QuickFixLine',      s:BrightCyan,           s:Black,               'none')     " Current quickfix item in the quickfix window
+call s:colorFor('Conceal',           s:BrightBlack,          s:NONE,                'none')     " Placeholder characters for concealed text
+call s:colorFor('ToolbarLine',       s:BrightWhite,          s:Black,               'none')     " Toolbar background
+call s:colorFor('ToolbarButton',     s:BrightWhite,          s:BrightBlack,         'none')     " Toolbar buttons
+call s:colorFor('debugPC',           s:White,                s:NONE,                'none')     " Current line in :terminal debugger
+call s:colorFor('debugBreakpoint',   s:BrightBlack,          s:NONE,                'none')     " Breakpoint marker in :terminal debugger
+call s:colorFor('ErrorMsg',          s:Red,                  s:NONE,                'bold,italic')" Error messages on the command line
+call s:colorFor('WarningMsg',        s:BrightYellow,         s:NONE,                'none')     " Warning messages
+call s:colorFor('DiffAdd',           s:Black,                s:BrightGreen,         'none')     " Diff mode: added line
+call s:colorFor('DiffChange',        s:Black,                s:BrightBlue,          'none')     " Diff mode: changed line
+call s:colorFor('DiffDelete',        s:Black,                s:BrightRed,           'none')     " Diff mode: deleted line
+call s:colorFor('DiffText',          s:Black,                s:BrightCyan,          'none')     " Diff mode: changed text within a changed line
+call s:colorFor('DiffTextAdd',       s:Black,                s:BrightCyan,          'none')     " Diff mode: added text within a changed line
+call s:colorFor('diffAdded',         s:BrightGreen,          s:NONE,                'none')     " Diff syntax: added line
+call s:colorFor('diffRemoved',       s:BrightRed,            s:NONE,                'none')     " Diff syntax: removed line
+call s:colorFor('diffChanged',       s:BrightBlue,           s:NONE,                'none')     " Diff syntax: changed line
+call s:colorFor('diffOldFile',       s:BrightYellow,         s:NONE,                'none')     " Diff syntax: old file name
+call s:colorFor('diffNewFile',       s:BrightMagenta,        s:NONE,                'none')     " Diff syntax: new file name
+call s:colorFor('diffFile',          s:BrightBlue,           s:NONE,                'none')     " Diff syntax: file header
+call s:colorFor('diffLine',          s:White,                s:NONE,                'none')     " Diff syntax: line info (@@...@@)
+call s:colorFor('diffIndexLine',     s:BrightCyan,           s:NONE,                'none')     " Diff syntax: index line
+call s:colorFor('healthError',       s:Red,                  s:NONE,                'none')     " :checkhealth error
+call s:colorFor('healthSuccess',     s:Green,                s:NONE,                'none')     " :checkhealth success
+call s:colorFor('healthWarning',     s:Yellow,               s:NONE,                'none')     " :checkhealth warning
 
 " Spelling
-call starter#colors#hi('SpellBad',          s:c.NONE,          s:c.NONE,         'undercurl',   s:c.Red)      " Word not recognized by spellchecker
-call starter#colors#hi('SpellCap',          s:c.NONE,          s:c.NONE,         'undercurl',   s:c.Blue)     " Word should start with capital letter
-call starter#colors#hi('SpellLocal',        s:c.NONE,          s:c.NONE,         'undercurl',   s:c.Cyan)     " Word recognized as used in another region
-call starter#colors#hi('SpellRare',         s:c.NONE,          s:c.NONE,         'undercurl',   s:c.Magenta)  " Rare word
+call s:colorFor('SpellBad',          s:NONE,                 s:NONE,                'undercurl',   s:Red)          " Word not recognized by spellchecker
+call s:colorFor('SpellCap',          s:NONE,                 s:NONE,                'undercurl',   s:Blue)         " Word should start with capital letter
+call s:colorFor('SpellLocal',        s:NONE,                 s:NONE,                'undercurl',   s:Cyan)         " Word recognized as used in another region
+call s:colorFor('SpellRare',         s:NONE,                 s:NONE,                'undercurl',   s:Magenta)      " Rare word
 
 " Syntax
-call starter#colors#hi('Comment',           s:c.BrightBlack,   s:c.NONE,         'italic')      " Any comment
-call starter#colors#hi('Constant',          s:c.NONE,          s:c.NONE,         'none')        " Any constant
-call starter#colors#hi('String',            s:c.NONE,          s:c.NONE,         'none')        " String constant
-call starter#colors#hi('Character',         s:c.NONE,          s:c.NONE,         'none')        " Character constant: 'c', '\n'
-call starter#colors#hi('Number',            s:c.NONE,          s:c.NONE,         'none')        " Number constant: 234, 0xff
-call starter#colors#hi('Boolean',           s:c.NONE,          s:c.NONE,         'none')        " Boolean constant (true, false)
-call starter#colors#hi('Float',             s:c.NONE,          s:c.NONE,         'none')        " Floating point constant: 2.3e10
-call starter#colors#hi('Identifier',        s:c.NONE,          s:c.NONE,         'none')        " Variable name
-call starter#colors#hi('Function',          s:c.NONE,          s:c.NONE,         'none')        " Function name
-call starter#colors#hi('Statement',         s:c.NONE,          s:c.NONE,         'none')        " Any statement (if, do, for, etc.)
-call starter#colors#hi('Conditional',       s:c.NONE,          s:c.NONE,         'none')        " if, then, else, endif, switch, etc.
-call starter#colors#hi('Repeat',            s:c.NONE,          s:c.NONE,         'none')        " for, do, while, etc.
-call starter#colors#hi('Label',             s:c.NONE,          s:c.NONE,         'none')        " case, default, etc.
-call starter#colors#hi('Operator',          s:c.NONE,          s:c.NONE,         'none')        " Operators (sizeof, +, *, etc.)
-call starter#colors#hi('Keyword',           s:c.NONE,          s:c.NONE,         'none')        " Any other keyword
-call starter#colors#hi('Exception',         s:c.NONE,          s:c.NONE,         'none')        " try, catch, throw
-call starter#colors#hi('PreProc',           s:c.NONE,          s:c.NONE,         'none')        " Generic preprocessor
-call starter#colors#hi('Include',           s:c.NONE,          s:c.NONE,         'none')        " #include preprocessor
-call starter#colors#hi('Define',            s:c.NONE,          s:c.NONE,         'none')        " Preprocessor #define
-call starter#colors#hi('Macro',             s:c.NONE,          s:c.NONE,         'none')        " Macro definitions
-call starter#colors#hi('PreCondit',         s:c.NONE,          s:c.NONE,         'none')        " Preprocessor #if, #else, #endif, etc.
-call starter#colors#hi('Type',              s:c.NONE,          s:c.NONE,         'none')        " int, long, char, etc.
-call starter#colors#hi('StorageClass',      s:c.NONE,          s:c.NONE,         'none')        " static, register, volatile, etc.
-call starter#colors#hi('Structure',         s:c.NONE,          s:c.NONE,         'none')        " struct, union, enum, etc.
-call starter#colors#hi('Typedef',           s:c.NONE,          s:c.NONE,         'none')        " A typedef
-call starter#colors#hi('Special',           s:c.NONE,          s:c.NONE,         'none')        " Special symbol (e.g. escape characters)
-call starter#colors#hi('SpecialChar',       s:c.NONE,          s:c.NONE,         'none')        " Special character in a constant
-call starter#colors#hi('Tag',               s:c.NONE,          s:c.NONE,         'none')        " You can use CTRL-] on this
-call starter#colors#hi('Delimiter',         s:c.NONE,          s:c.NONE,         'none')        " Character that needs attention
-call starter#colors#hi('SpecialComment',    s:c.NONE,          s:c.NONE,         'none')        " Special things inside a comment
-call starter#colors#hi('Debug',             s:c.NONE,          s:c.NONE,         'none')        " Debugging statements
-call starter#colors#hi('Error',             s:c.NONE,          s:c.NONE,         'none')        " Any erroneous construct
-call starter#colors#hi('Todo',              s:c.NONE,          s:c.NONE,         'bold')        " TODO, FIXME, XXX, etc.
-call starter#colors#hi('BoldItalic',        s:c.NONE,          s:c.NONE,         'bold,italic') " Bold and italic text (in markup)
-call starter#colors#hi('Added',             s:c.NONE,          s:c.NONE,         'none')        " Added line in a diff
-call starter#colors#hi('Changed',           s:c.NONE,          s:c.NONE,         'none')        " Changed line in a diff
-call starter#colors#hi('Removed',           s:c.NONE,          s:c.NONE,         'none')        " Removed line in a diff
+call s:colorFor('Comment',           s:BrightBlack,          s:NONE,                'italic')   " Any comment
+call s:colorFor('Constant',          s:NONE,                 s:NONE,                'none')     " Any constant
+call s:colorFor('String',            s:NONE,                 s:NONE,                'none')     " String constant
+call s:colorFor('Character',         s:NONE,                 s:NONE,                'none')     " Character constant: 'c', '\n'
+call s:colorFor('Number',            s:NONE,                 s:NONE,                'none')     " Number constant: 234, 0xff
+call s:colorFor('Boolean',           s:NONE,                 s:NONE,                'none')     " Boolean constant (true, false)
+call s:colorFor('Float',             s:NONE,                 s:NONE,                'none')     " Floating point constant: 2.3e10
+call s:colorFor('Identifier',        s:NONE,                 s:NONE,                'none')     " Variable name
+call s:colorFor('Function',          s:NONE,                 s:NONE,                'none')     " Function name
+call s:colorFor('Statement',         s:NONE,                 s:NONE,                'none')     " Any statement (if, do, for, etc.)
+call s:colorFor('Conditional',       s:NONE,                 s:NONE,                'none')     " if, then, else, endif, switch, etc.
+call s:colorFor('Repeat',            s:NONE,                 s:NONE,                'none')     " for, do, while, etc.
+call s:colorFor('Label',             s:NONE,                 s:NONE,                'none')     " case, default, etc.
+call s:colorFor('Operator',          s:NONE,                 s:NONE,                'none')     " Operators (sizeof, +, *, etc.)
+call s:colorFor('Keyword',           s:NONE,                 s:NONE,                'none')     " Any other keyword
+call s:colorFor('Exception',         s:NONE,                 s:NONE,                'none')     " try, catch, throw
+call s:colorFor('PreProc',           s:NONE,                 s:NONE,                'none')     " Generic preprocessor
+call s:colorFor('Include',           s:NONE,                 s:NONE,                'none')     " #include preprocessor
+call s:colorFor('Define',            s:NONE,                 s:NONE,                'none')     " Preprocessor #define
+call s:colorFor('Macro',             s:NONE,                 s:NONE,                'none')     " Macro definitions
+call s:colorFor('PreCondit',         s:NONE,                 s:NONE,                'none')     " Preprocessor #if, #else, #endif, etc.
+call s:colorFor('Type',              s:NONE,                 s:NONE,                'none')     " int, long, char, etc.
+call s:colorFor('StorageClass',      s:NONE,                 s:NONE,                'none')     " static, register, volatile, etc.
+call s:colorFor('Structure',         s:NONE,                 s:NONE,                'none')     " struct, union, enum, etc.
+call s:colorFor('Typedef',           s:NONE,                 s:NONE,                'none')     " A typedef
+call s:colorFor('Special',           s:NONE,                 s:NONE,                'none')     " Special symbol (e.g. escape characters)
+call s:colorFor('SpecialChar',       s:NONE,                 s:NONE,                'none')     " Special character in a constant
+call s:colorFor('Tag',               s:NONE,                 s:NONE,                'none')     " You can use CTRL-] on this
+call s:colorFor('Delimiter',         s:NONE,                 s:NONE,                'none')     " Character that needs attention
+call s:colorFor('SpecialComment',    s:NONE,                 s:NONE,                'none')     " Special things inside a comment
+call s:colorFor('Debug',             s:NONE,                 s:NONE,                'none')     " Debugging statements
+call s:colorFor('Error',             s:NONE,                 s:NONE,                'none')     " Any erroneous construct
+call s:colorFor('Todo',              s:NONE,                 s:NONE,                'bold')     " TODO, FIXME, XXX, etc.
+call s:colorFor('BoldItalic',        s:NONE,                 s:NONE,                'bold,italic')" Bold and italic text (in markup)
+call s:colorFor('Added',             s:NONE,                 s:NONE,                'none')     " Added line in a diff
+call s:colorFor('Changed',           s:NONE,                 s:NONE,                'none')     " Changed line in a diff
+call s:colorFor('Removed',           s:NONE,                 s:NONE,                'none')     " Removed line in a diff
 
 " Neovim-specific
 if has('nvim')
-  call starter#colors#hi('NormalFloat',       s:c.BrightWhite,   s:c.Black,        'none')        " Normal text in floating windows
-  call starter#colors#hi('FloatBorder',       s:c.White,         s:c.Black,        'none')        " Border of floating windows
-  call starter#colors#hi('FloatShadow',       s:c.BrightWhite,   s:c.Black,        'none')        " Shadow behind floating windows
+  call s:colorFor('NormalFloat',       s:BrightWhite,          s:Black,               'none')     " Normal text in floating windows
+  call s:colorFor('FloatBorder',       s:White,                s:Black,               'none')     " Border of floating windows
+  call s:colorFor('FloatShadow',       s:BrightWhite,          s:Black,               'none')     " Shadow behind floating windows
 endif
