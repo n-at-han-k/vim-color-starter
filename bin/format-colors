@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+import re
+filepath = './colors/color-starter.vim'
+with open(filepath, 'r') as f:
+    lines = f.readlines()
+lines = [l.rstrip('\n') for l in lines]
+hi_pattern = re.compile(r'^(\s*)call <sid>hi\((.+)\)\s*"\s*(.+)$')
+def parse_hi_line(line):
+    m = hi_pattern.match(line)
+    if not m:
+        return None
+    indent = m.group(1)
+    args_str = m.group(2)
+    comment = m.group(3)
+    # Parse args respecting quotes (handles 'bold,italic' which contains a comma)
+    args = []
+    current = ''
+    in_quotes = False
+    for ch in args_str:
+        if ch == "'":
+            in_quotes = not in_quotes
+            current += ch
+        elif ch == ',' and not in_quotes:
+            args.append(current.strip())
+            current = ''
+        else:
+            current += ch
+    args.append(current.strip())
+    return indent, args, comment
+# Column widths (based on widest value in each position):
+#   arg1 (group):  19  ('PopupNotification')
+#   arg2 (fg):     22  (s:starterBrightMagenta)
+#   arg3 (bg):     21  (s:starterBrightYellow)
+#   arg4 (style):  13  ('bold,italic')
+#   arg5 (ul):     16  (s:starterMagenta)
+#
+# Comment columns:
+#   4-arg lines: col 96
+#   5-arg lines: col 115
+COMMENT_COL_4ARG = 96
+COMMENT_COL_5ARG = 115
+def format_hi_line(indent, args, comment):
+    prefix = f"{indent}call <sid>hi("
+    f1 = (args[0] + ',').ljust(20)
+    f2 = (args[1] + ',').ljust(23)
+    f3 = (args[2] + ',').ljust(22)
+    if len(args) == 5:
+        f4 = (args[3] + ',').ljust(14)
+        f5 = args[4]
+        before_comment = f'{prefix}{f1} {f2} {f3} {f4} {f5})'
+        comment_col = COMMENT_COL_5ARG + len(indent)
+    else:
+        f4 = args[3]
+        before_comment = f'{prefix}{f1} {f2} {f3} {f4})'
+        comment_col = COMMENT_COL_4ARG + len(indent)
+    before_comment = before_comment.ljust(comment_col)
+    return f'{before_comment}" {comment}'
+# Identify 5-arg (spell) lines
+spell_data = []
+spell_indices = set()
+for i, line in enumerate(lines):
+    parsed = parse_hi_line(line)
+    if parsed and len(parsed[1]) == 5:
+        spell_data.append(parsed)
+        spell_indices.add(i)
+# Build output
+output = []
+spell_inserted = False
+for i, line in enumerate(lines):
+    # Skip spell lines in their original position
+    if i in spell_indices:
+        continue
+    # Insert spell section before the blank line that precedes "Syntax"
+    if (not spell_inserted
+        and line.strip() == ''
+        and i + 1 < len(lines)
+        and lines[i + 1].strip().startswith('" Syntax')):
+        output.append('')
+        output.append('" Spelling')
+        for sd in spell_data:
+            output.append(format_hi_line(*sd))
+        output.append('')
+        spell_inserted = True
+        continue
+    # Format hi() call lines
+    parsed = parse_hi_line(line)
+    if parsed:
+        output.append(format_hi_line(*parsed))
+    else:
+        output.append(line)
+with open(filepath, 'w') as f:
+    f.write('\n'.join(output) + '\n')
+print("Done!")
