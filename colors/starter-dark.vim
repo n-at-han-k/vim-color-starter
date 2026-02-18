@@ -53,7 +53,7 @@ let s:NONE          = {'cterm': 'NONE', 'gui': 'NONE',                     'name
 
 function! s:colorFor(group, fg, bg, style, ...) abort
 
-  " Some groups get a special/undercurl color, some don't.
+  " Some groups get a special/underline color, some don't.
   " Therefore, the 5th argument is optional.
   "
   " Defaults to 'NONE' when not provided.
@@ -178,10 +178,10 @@ call s:colorFor('healthSuccess',     s:Green,                s:NONE,            
 call s:colorFor('healthWarning',     s:Yellow,               s:NONE,                'none')     " :checkhealth warning
 
 " Spelling
-call s:colorFor('SpellBad',          s:NONE,                 s:NONE,                'undercurl',   s:Red)          " Word not recognized by spellchecker
-call s:colorFor('SpellCap',          s:NONE,                 s:NONE,                'undercurl',   s:Blue)         " Word should start with capital letter
-call s:colorFor('SpellLocal',        s:NONE,                 s:NONE,                'undercurl',   s:Cyan)         " Word recognized as used in another region
-call s:colorFor('SpellRare',         s:NONE,                 s:NONE,                'undercurl',   s:Magenta)      " Rare word
+call s:colorFor('SpellBad',          s:NONE,                 s:NONE,                'underline',   s:Red)          " Word not recognized by spellchecker
+call s:colorFor('SpellCap',          s:NONE,                 s:NONE,                'underline',   s:Blue)         " Word should start with capital letter
+call s:colorFor('SpellLocal',        s:NONE,                 s:NONE,                'underline',   s:Cyan)         " Word recognized as used in another region
+call s:colorFor('SpellRare',         s:NONE,                 s:NONE,                'underline',   s:Magenta)      " Rare word
 
 " Syntax
 call s:colorFor('Comment',           s:BrightBlack,          s:NONE,                'italic')   " Any comment
@@ -228,3 +228,19 @@ if has('nvim')
   call s:colorFor('FloatBorder',       s:White,                s:Black,               'none')     " Border of floating windows
   call s:colorFor('FloatShadow',       s:BrightWhite,          s:Black,               'none')     " Shadow behind floating windows
 endif
+
+" Custom Syntax matchers.
+" They have to be in an `augroup` so that they run 
+" on each file opening.
+augroup MyHighlights
+  autocmd!
+  autocmd BufWinEnter * call matchadd('InlineCode', '`[^`]\+`')     " markdown inline code same style as strings
+  autocmd BufWinEnter * call matchadd('CodeBlock', '```\_.\{-}```') " markdown code blocks same style as strings
+  autocmd BufWinEnter * call matchadd('Underlined', 'https\?:\/\/\S\+', 20)  " style for urls
+  autocmd BufWinEnter * call matchadd('Todo', '\<\(TODO\|FIXME\|HACK\|XXX\)\>', 20) " custom todo markers
+augroup END
+
+" Custom syntax matchers
+call s:colorFor('InlineCode',  s:BrightBlack,  s:NONE,  'bold')     " Markdown inline code (`code`)
+call s:colorFor('CodeBlock',   s:BrightBlack,  s:NONE,  'bold')     " Markdown code blocks (```...```)
+
