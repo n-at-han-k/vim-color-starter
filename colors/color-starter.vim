@@ -22,7 +22,7 @@ let g:colors_name = 'color-starter'
 "   tango, gruvbox_dark, gruvbox_light, solarized_dark, solarized_light,
 "   nord, dracula, tokyo_night, catppuccin_mocha, one_dark
 let s:selectedColorMap = 'tango'
-"set notermguicolors
+set notermguicolors
 
 let s:tango = {
   \ 'Black':         '#000000',
