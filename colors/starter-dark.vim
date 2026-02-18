@@ -1,16 +1,7 @@
-" starter-dark.vim - A dark terminal ANSI colorscheme
-" Maintainer: Nathan
-" Version: 2.0.0
-" License: MIT
+" starter-dark.vim - A dark starter colorscheme
 "
-" Optionally set a colormap in .vimrc (before `colorscheme starter-dark`):
-"
-"   let g:term_colormap = 'one_dark'
-"
-" When a colormap is set, termguicolors is enabled automatically.
-" Without a colormap, terminal ANSI colors are used as-is.
-"
-" Dark colormap options:
+" Colormap options:
+"   gruvbox_light, solarized_light,
 "   tango, gruvbox_dark, solarized_dark, nord, dracula,
 "   tokyo_night, catppuccin_mocha, one_dark, dark, light
 
@@ -26,11 +17,7 @@ let g:colors_name = 'starter-dark'
 
 set termguicolors
 
-if exists('g:term_colormap')
-  let s:selectedColorMap = g:term_colormap
-else
-  let s:selectedColorMap = 'dark'
-endif
+let s:selectedColorMap = 'dark'
 
 let s:c = starter#colors#load(s:selectedColorMap)
 

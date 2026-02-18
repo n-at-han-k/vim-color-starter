@@ -1,17 +1,9 @@
-" starter-light.vim - A light terminal ANSI colorscheme
-" Maintainer: Nathan
-" Version: 2.0.0
-" License: MIT
+" starter-light.vim - A light starter colorscheme
 "
-" Optionally set a colormap in .vimrc (before `colorscheme starter-light`):
-"
-"   let g:term_colormap = 'gruvbox_light'
-"
-" When a colormap is set, termguicolors is enabled automatically.
-" Without a colormap, terminal ANSI colors are used as-is.
-"
-" Light colormap options:
-"   gruvbox_light, solarized_light
+" Colormap options:
+"   gruvbox_light, solarized_light,
+"   tango, gruvbox_dark, solarized_dark, nord, dracula,
+"   tokyo_night, catppuccin_mocha, one_dark, dark, light
 "
 " Note: The light colormaps have inverted Black/BrightWhite values -
 " 'Black' is the light background and 'BrightWhite' is dark foreground.
@@ -28,11 +20,7 @@ let g:colors_name = 'starter-light'
 
 set termguicolors
 
-if exists('g:term_colormap')
-  let s:selectedColorMap = g:term_colormap
-else
-  let s:selectedColorMap = 'light'
-endif
+let s:selectedColorMap = 'light'
 
 let s:c = starter#colors#load(s:selectedColorMap)
 
