@@ -288,7 +288,7 @@ function! s:hi(group, fg, bg, style, ...) abort
 endfunction
 
 " Editor Elements
-call <sid>hi('Normal',            s:starterNone,          s:starterNone,         'none')        " Normal text
+call <sid>hi('Normal',            s:starterWhite,         s:starterBlack,        'none')        " Normal text
 call <sid>hi('NonText',           s:starterBlack,         s:starterNone,         'none')        " Characters that don't exist in the text (e.g. '~' after end of buffer)
 call <sid>hi('EndOfBuffer',       s:starterBlack,         s:starterNone,         'none')        " Filler lines (~) after the last line in the buffer
 call <sid>hi('Ignore',            s:starterNone,          s:starterNone,         'none')        " Left blank, hidden
