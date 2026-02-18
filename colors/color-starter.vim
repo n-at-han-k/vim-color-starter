@@ -16,13 +16,13 @@ if exists('syntax_on')
 endif
 
 let g:colors_name = 'color-starter'
-set notermguicolors
 
 " Color Palettes
 " Set s:selectedColorMap to one of:
 "   tango, gruvbox_dark, gruvbox_light, solarized_dark, solarized_light,
 "   nord, dracula, tokyo_night, catppuccin_mocha, one_dark
-let s:selectedColorMap = 'tango'
+let s:selectedColorMap = 'catppucin_mocha'
+"set notermguicolors
 
 let s:tango = {
   \ 'Black':         '#000000',
