@@ -21,7 +21,7 @@ let g:colors_name = 'color-starter'
 " Set s:selectedColorMap to one of:
 "   tango, gruvbox_dark, gruvbox_light, solarized_dark, solarized_light,
 "   nord, dracula, tokyo_night, catppuccin_mocha, one_dark
-let s:selectedColorMap = 'catppucin_mocha'
+let s:selectedColorMap = 'catppuccin_mocha'
 "set notermguicolors
 
 let s:tango = {
