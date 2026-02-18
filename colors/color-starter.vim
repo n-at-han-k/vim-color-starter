@@ -346,14 +346,14 @@ call <sid>hi('SpecialKey',        s:starterBlack,         s:starterNone,        
 call <sid>hi('IncSearch',         s:starterBlack,         s:starterRed,          'none')        " 'incsearch' highlighting; also for replaced text with :s///c
 call <sid>hi('CurSearch',         s:starterBlack,         s:starterYellow,       'none')        " Current search match under cursor
 call <sid>hi('Search',            s:starterBlack,         s:starterBrightYellow, 'none')        " Last search pattern highlighting
-call <sid>hi('Directory',         s:starterBlue,          s:starterNone,         'none')        " Directory names in listings and other special names
+call <sid>hi('Directory',         s:starterNone,          s:starterNone,         'none')        " Directory names in listings and other special names
 call <sid>hi('MatchParen',        s:starterYellow,        s:starterBlack,        'underline')   " Matching parenthesis/bracket under cursor and its match
 call <sid>hi('MessageWindow',     s:starterBrightYellow,  s:starterNone,         'none')        " Messages popup window used by :echowindow
 call <sid>hi('ModeMsg',           s:starterBlack,         s:starterBrightWhite,  'bold')        " 'showmode' message (e.g. -- INSERT --)
 call <sid>hi('MsgArea',           s:starterNone,          s:starterNone,         'none')        " Command-line area
 call <sid>hi('MoreMsg',           s:starterBlue,          s:starterNone,         'none')        " 'more-prompt' (-- More --)
 call <sid>hi('Question',          s:starterBlue,          s:starterNone,         'none')        " Hit-enter prompt and yes/no questions
-call <sid>hi('ColorColumn',       s:starterNone,          s:starterBrightBlack,  'none')        " Columns set with 'colorcolumn'
+call <sid>hi('ColorColumn',       s:starterNone,          s:starterNone,         'none')        " Columns set with 'colorcolumn'
 call <sid>hi('SignColumn',        s:starterWhite,         s:starterNone,         'none')        " Column where signs are displayed
 call <sid>hi('QuickFixLine',      s:starterBrightCyan,    s:starterBlack,        'none')        " Current quickfix item in the quickfix window
 call <sid>hi('Conceal',           s:starterBrightBlack,   s:starterNone,         'none')        " Placeholder characters for concealed text
