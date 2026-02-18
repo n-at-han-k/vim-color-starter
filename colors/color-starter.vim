@@ -390,42 +390,42 @@ call <sid>hi('SpellRare',         s:starterNone,          s:starterNone,        
 
 " Syntax
 call <sid>hi('Comment',           s:starterBrightBlack,   s:starterNone,         'italic')      " Any comment
-call <sid>hi('Constant',          s:starterYellow,        s:starterNone,         'none')        " Any constant
-call <sid>hi('String',            s:starterGreen,         s:starterNone,         'none')        " String constant
-call <sid>hi('Character',         s:starterYellow,        s:starterNone,         'none')        " Character constant: 'c', '\n'
-call <sid>hi('Number',            s:starterYellow,        s:starterNone,         'none')        " Number constant: 234, 0xff
-call <sid>hi('Boolean',           s:starterYellow,        s:starterNone,         'none')        " Boolean constant (true, false)
-call <sid>hi('Float',             s:starterYellow,        s:starterNone,         'none')        " Floating point constant: 2.3e10
-call <sid>hi('Identifier',        s:starterBrightRed,     s:starterNone,         'none')        " Variable name
-call <sid>hi('Function',          s:starterBlue,          s:starterNone,         'none')        " Function name
-call <sid>hi('Statement',         s:starterMagenta,       s:starterNone,         'none')        " Any statement (if, do, for, etc.)
-call <sid>hi('Conditional',       s:starterMagenta,       s:starterNone,         'none')        " if, then, else, endif, switch, etc.
-call <sid>hi('Repeat',            s:starterMagenta,       s:starterNone,         'none')        " for, do, while, etc.
-call <sid>hi('Label',             s:starterBrightCyan,    s:starterNone,         'none')        " case, default, etc.
-call <sid>hi('Operator',          s:starterCyan,          s:starterNone,         'none')        " Operators (sizeof, +, *, etc.)
-call <sid>hi('Keyword',           s:starterMagenta,       s:starterNone,         'none')        " Any other keyword
-call <sid>hi('Exception',         s:starterMagenta,       s:starterNone,         'none')        " try, catch, throw
-call <sid>hi('PreProc',           s:starterBrightMagenta, s:starterNone,         'none')        " Generic preprocessor
-call <sid>hi('Include',           s:starterMagenta,       s:starterNone,         'none')        " #include preprocessor
-call <sid>hi('Define',            s:starterBrightMagenta, s:starterNone,         'none')        " Preprocessor #define
-call <sid>hi('Macro',             s:starterMagenta,       s:starterNone,         'none')        " Macro definitions
-call <sid>hi('PreCondit',         s:starterBrightMagenta, s:starterNone,         'none')        " Preprocessor #if, #else, #endif, etc.
-call <sid>hi('Type',              s:starterBrightYellow,  s:starterNone,         'none')        " int, long, char, etc.
-call <sid>hi('StorageClass',      s:starterBrightYellow,  s:starterNone,         'none')        " static, register, volatile, etc.
-call <sid>hi('Structure',         s:starterBrightYellow,  s:starterNone,         'none')        " struct, union, enum, etc.
-call <sid>hi('Typedef',           s:starterBrightYellow,  s:starterNone,         'none')        " A typedef
-call <sid>hi('Special',           s:starterBrightMagenta, s:starterNone,         'none')        " Special symbol (e.g. escape characters)
-call <sid>hi('SpecialChar',       s:starterBrightMagenta, s:starterNone,         'none')        " Special character in a constant
-call <sid>hi('Tag',               s:starterBrightMagenta, s:starterNone,         'none')        " You can use CTRL-] on this
-call <sid>hi('Delimiter',         s:starterBrightMagenta, s:starterNone,         'none')        " Character that needs attention
-call <sid>hi('SpecialComment',    s:starterBrightMagenta, s:starterNone,         'none')        " Special things inside a comment
-call <sid>hi('Debug',             s:starterBrightMagenta, s:starterNone,         'none')        " Debugging statements
-call <sid>hi('Error',             s:starterRed,           s:starterNone,         'none')        " Any erroneous construct
-call <sid>hi('Todo',              s:starterBlack,         s:starterBrightRed,    'bold')        " TODO, FIXME, XXX, etc.
+call <sid>hi('Constant',          s:starterNone,          s:starterNone,         'none')        " Any constant
+call <sid>hi('String',            s:starterNone,          s:starterNone,         'none')        " String constant
+call <sid>hi('Character',         s:starterNone,          s:starterNone,         'none')        " Character constant: 'c', '\n'
+call <sid>hi('Number',            s:starterNone,          s:starterNone,         'none')        " Number constant: 234, 0xff
+call <sid>hi('Boolean',           s:starterNone,          s:starterNone,         'none')        " Boolean constant (true, false)
+call <sid>hi('Float',             s:starterNone,          s:starterNone,         'none')        " Floating point constant: 2.3e10
+call <sid>hi('Identifier',        s:starterNone,          s:starterNone,         'none')        " Variable name
+call <sid>hi('Function',          s:starterNone,          s:starterNone,         'none')        " Function name
+call <sid>hi('Statement',         s:starterNone,          s:starterNone,         'none')        " Any statement (if, do, for, etc.)
+call <sid>hi('Conditional',       s:starterNone,          s:starterNone,         'none')        " if, then, else, endif, switch, etc.
+call <sid>hi('Repeat',            s:starterNone,          s:starterNone,         'none')        " for, do, while, etc.
+call <sid>hi('Label',             s:starterNone,          s:starterNone,         'none')        " case, default, etc.
+call <sid>hi('Operator',          s:starterNone,          s:starterNone,         'none')        " Operators (sizeof, +, *, etc.)
+call <sid>hi('Keyword',           s:starterNone,          s:starterNone,         'none')        " Any other keyword
+call <sid>hi('Exception',         s:starterNone,          s:starterNone,         'none')        " try, catch, throw
+call <sid>hi('PreProc',           s:starterNone,          s:starterNone,         'none')        " Generic preprocessor
+call <sid>hi('Include',           s:starterNone,          s:starterNone,         'none')        " #include preprocessor
+call <sid>hi('Define',            s:starterNone,          s:starterNone,         'none')        " Preprocessor #define
+call <sid>hi('Macro',             s:starterNone,          s:starterNone,         'none')        " Macro definitions
+call <sid>hi('PreCondit',         s:starterNone,          s:starterNone,         'none')        " Preprocessor #if, #else, #endif, etc.
+call <sid>hi('Type',              s:starterNone,          s:starterNone,         'none')        " int, long, char, etc.
+call <sid>hi('StorageClass',      s:starterNone,          s:starterNone,         'none')        " static, register, volatile, etc.
+call <sid>hi('Structure',         s:starterNone,          s:starterNone,         'none')        " struct, union, enum, etc.
+call <sid>hi('Typedef',           s:starterNone,          s:starterNone,         'none')        " A typedef
+call <sid>hi('Special',           s:starterNone,          s:starterNone,         'none')        " Special symbol (e.g. escape characters)
+call <sid>hi('SpecialChar',       s:starterNone,          s:starterNone,         'none')        " Special character in a constant
+call <sid>hi('Tag',               s:starterNone,          s:starterNone,         'none')        " You can use CTRL-] on this
+call <sid>hi('Delimiter',         s:starterNone,          s:starterNone,         'none')        " Character that needs attention
+call <sid>hi('SpecialComment',    s:starterNone,          s:starterNone,         'none')        " Special things inside a comment
+call <sid>hi('Debug',             s:starterNone,          s:starterNone,         'none')        " Debugging statements
+call <sid>hi('Error',             s:starterNone,          s:starterNone,         'none')        " Any erroneous construct
+call <sid>hi('Todo',              s:starterNone,          s:starterNone,         'bold')        " TODO, FIXME, XXX, etc.
 call <sid>hi('BoldItalic',        s:starterNone,          s:starterNone,         'bold,italic') " Bold and italic text (in markup)
-call <sid>hi('Added',             s:starterBrightGreen,   s:starterNone,         'none')        " Added line in a diff
-call <sid>hi('Changed',           s:starterBrightBlue,    s:starterNone,         'none')        " Changed line in a diff
-call <sid>hi('Removed',           s:starterBrightRed,     s:starterNone,         'none')        " Removed line in a diff
+call <sid>hi('Added',             s:starterNone,          s:starterNone,         'none')        " Added line in a diff
+call <sid>hi('Changed',           s:starterNone,          s:starterNone,         'none')        " Changed line in a diff
+call <sid>hi('Removed',           s:starterNone,          s:starterNone,         'none')        " Removed line in a diff
 
 " Neovim-specific
 if has('nvim')
