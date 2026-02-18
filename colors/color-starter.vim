@@ -3,10 +3,10 @@
 " Version: 1.0.0
 " License: MIT
 
-if exists('g:loaded_color_starter')
-  finish
-endif
-let g:loaded_color_starter = 1
+"if exists('g:loaded_color_starter')
+"  finish
+"endif
+"let g:loaded_color_starter = 1
 
 set background=dark
 hi clear
