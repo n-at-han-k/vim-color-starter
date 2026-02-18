@@ -26,103 +26,105 @@ set background=light
 
 let g:colors_name = 'starter-light'
 
+set termguicolors
+
 if exists('g:term_colormap')
   let s:selectedColorMap = g:term_colormap
-  set termguicolors
 else
-  let s:selectedColorMap = 'tango'
+  let s:selectedColorMap = 'light'
 endif
 
 let s:c = starter#colors#load(s:selectedColorMap)
 
 " Editor Elements
-call starter#colors#hi('Normal',            s:c.BrightWhite,   s:c.Black,        'none')        " Normal text
+call starter#colors#hi('Normal',            s:c.Black,         s:c.White,        'none')        " Normal text
 call starter#colors#hi('NonText',           s:c.White,         s:c.NONE,         'none')        " Characters that don't exist in the text (e.g. '~' after end of buffer)
 call starter#colors#hi('EndOfBuffer',       s:c.White,         s:c.NONE,         'none')        " Filler lines (~) after the last line in the buffer
 call starter#colors#hi('Ignore',            s:c.NONE,          s:c.NONE,         'none')        " Left blank, hidden
 call starter#colors#hi('Underlined',        s:c.NONE,          s:c.NONE,         'underline')   " Text that stands out, HTML links
 call starter#colors#hi('Bold',              s:c.NONE,          s:c.NONE,         'bold')        " Bold text (in markup)
 call starter#colors#hi('Italic',            s:c.NONE,          s:c.NONE,         'italic')      " Italic text (in markup)
-call starter#colors#hi('StatusLine',        s:c.BrightWhite,   s:c.White,        'none')        " Status line of current window
-call starter#colors#hi('StatusLineNC',      s:c.BrightBlack,   s:c.Black,        'none')        " Status lines of non-current windows
-call starter#colors#hi('StatusLineTerm',    s:c.BrightWhite,   s:c.White,        'none')        " Status line of current terminal window
-call starter#colors#hi('StatusLineTermNC',  s:c.BrightBlack,   s:c.Black,        'none')        " Status lines of non-current terminal windows
-call starter#colors#hi('VertSplit',         s:c.White,         s:c.NONE,         'none')        " Column separating vertically split windows
-call starter#colors#hi('TabLine',           s:c.BrightWhite,   s:c.Black,        'none')        " Tab pages line, not active tab page label
-call starter#colors#hi('TabLineFill',       s:c.Black,         s:c.NONE,         'none')        " Tab pages line, where there are no labels
-call starter#colors#hi('TabLineSel',        s:c.BrightWhite,   s:c.BrightYellow, 'none')        " Tab pages line, active tab page label
-call starter#colors#hi('TabPanel',          s:c.BrightWhite,   s:c.Black,        'none')        " TabPanel, not active tab page label
-call starter#colors#hi('TabPanelFill',      s:c.Black,         s:c.NONE,         'none')        " TabPanel, where there are no labels
-call starter#colors#hi('TabPanelSel',       s:c.BrightWhite,   s:c.BrightYellow, 'none')        " TabPanel, active tab page label
+call starter#colors#hi('StatusLine',        s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Status line of current window
+call starter#colors#hi('StatusLineNC',      s:c.BrightWhite,   s:c.White,        'none')        " Status lines of non-current windows
+call starter#colors#hi('StatusLineTerm',    s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Status line of current terminal window
+call starter#colors#hi('StatusLineTermNC',  s:c.BrightWhite,   s:c.White,        'none')        " Status lines of non-current terminal windows
+call starter#colors#hi('VertSplit',         s:c.BrightBlack,   s:c.NONE,         'none')        " Column separating vertically split windows
+call starter#colors#hi('TabLine',           s:c.Black,         s:c.White,        'none')        " Tab pages line, not active tab page label
+call starter#colors#hi('TabLineFill',       s:c.White,         s:c.NONE,         'none')        " Tab pages line, where there are no labels
+call starter#colors#hi('TabLineSel',        s:c.White,         s:c.BrightYellow, 'none')        " Tab pages line, active tab page label
+call starter#colors#hi('TabPanel',          s:c.Black,         s:c.White,        'none')        " TabPanel, not active tab page label
+call starter#colors#hi('TabPanelFill',      s:c.White,         s:c.NONE,         'none')        " TabPanel, where there are no labels
+call starter#colors#hi('TabPanelSel',       s:c.White,         s:c.BrightYellow, 'none')        " TabPanel, active tab page label
 call starter#colors#hi('Terminal',          s:c.NONE,          s:c.NONE,         'none')        " Terminal window
 call starter#colors#hi('Title',             s:c.Blue,          s:c.NONE,         'bold')        " Titles for output from :set all, :autocmd, etc.
-call starter#colors#hi('CursorLine',        s:c.NONE,          s:c.BrightBlack,  'none')        " Screen line the cursor is on (when 'cursorline' is set)
-call starter#colors#hi('Cursor',            s:c.Black,         s:c.BrightWhite,  'none')        " Character under the cursor
-call starter#colors#hi('lCursor',           s:c.Black,         s:c.BrightWhite,  'none')        " Character under cursor when language-mapping is used
-call starter#colors#hi('CursorIM',          s:c.Black,         s:c.BrightWhite,  'none')        " Cursor in IME mode
-call starter#colors#hi('CursorColumn',      s:c.NONE,          s:c.BrightBlack,  'none')        " Screen column the cursor is in (when 'cursorcolumn' is set)
+call starter#colors#hi('CursorLine',        s:c.NONE,          s:c.White,        'none')        " Screen line the cursor is on (when 'cursorline' is set)
+call starter#colors#hi('Cursor',            s:c.White,         s:c.BrightWhite,  'none')        " Character under the cursor
+call starter#colors#hi('lCursor',           s:c.White,         s:c.BrightWhite,  'none')        " Character under cursor when language-mapping is used
+call starter#colors#hi('CursorIM',          s:c.White,         s:c.BrightWhite,  'none')        " Cursor in IME mode
+call starter#colors#hi('CursorColumn',      s:c.NONE,          s:c.White,        'none')        " Screen column the cursor is in (when 'cursorcolumn' is set)
 call starter#colors#hi('LineNr',            s:c.BrightBlack,   s:c.NONE,         'none')        " Line number for :number and :# commands
 call starter#colors#hi('LineNrAbove',       s:c.BrightBlack,   s:c.NONE,         'none')        " Line number above cursor (relativenumber)
 call starter#colors#hi('LineNrBelow',       s:c.BrightBlack,   s:c.NONE,         'none')        " Line number below cursor (relativenumber)
 call starter#colors#hi('CursorLineNr',      s:c.Cyan,          s:c.NONE,         'none')        " Line number when 'cursorline' is set
-call starter#colors#hi('CursorLineFold',    s:c.BrightWhite,   s:c.BrightBlack,  'none')        " FoldColumn when 'cursorline' is set for cursor line
-call starter#colors#hi('CursorLineSign',    s:c.BrightWhite,   s:c.BrightBlack,  'none')        " SignColumn when 'cursorline' is set for cursor line
+call starter#colors#hi('CursorLineFold',    s:c.Black,         s:c.White,        'none')        " FoldColumn when 'cursorline' is set for cursor line
+call starter#colors#hi('CursorLineSign',    s:c.Black,         s:c.White,        'none')        " SignColumn when 'cursorline' is set for cursor line
 call starter#colors#hi('helpLeadBlank',     s:c.NONE,          s:c.NONE,         'none')        " Leading blank in help files
 call starter#colors#hi('helpNormal',        s:c.NONE,          s:c.NONE,         'none')        " Normal text in help files
-call starter#colors#hi('Visual',            s:c.BrightWhite,   s:c.White,        'bold')        " Visual mode selection
-call starter#colors#hi('VisualNOS',         s:c.BrightWhite,   s:c.White,        'bold')        " Visual mode selection when vim is "Not Owning the Selection"
-call starter#colors#hi('Pmenu',             s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Popup menu: normal item
-call starter#colors#hi('PmenuSbar',         s:c.BrightWhite,   s:c.White,        'none')        " Popup menu: scrollbar
-call starter#colors#hi('PmenuSel',          s:c.BrightWhite,   s:c.White,        'bold')        " Popup menu: selected item
-call starter#colors#hi('PmenuThumb',        s:c.NONE,          s:c.BrightWhite,  'none')        " Popup menu: scrollbar thumb
-call starter#colors#hi('PmenuKind',         s:c.BrightCyan,    s:c.BrightBlack,  'none')        " Popup menu: normal item "kind"
-call starter#colors#hi('PmenuKindSel',      s:c.BrightCyan,    s:c.White,        'bold')        " Popup menu: selected item "kind"
-call starter#colors#hi('PmenuExtra',        s:c.BrightBlack,   s:c.BrightBlack,  'none')        " Popup menu: normal item "extra text"
-call starter#colors#hi('PmenuExtraSel',     s:c.BrightWhite,   s:c.White,        'bold')        " Popup menu: selected item "extra text"
-call starter#colors#hi('PmenuMatch',        s:c.BrightYellow,  s:c.BrightBlack,  'none')        " Popup menu: matched text in normal item
-call starter#colors#hi('PmenuMatchSel',     s:c.BrightYellow,  s:c.White,        'bold')        " Popup menu: matched text in selected item
-call starter#colors#hi('PmenuBorder',       s:c.White,         s:c.BrightBlack,  'none')        " Popup menu: border characters
+call starter#colors#hi('Visual',            s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Visual mode selection
+call starter#colors#hi('VisualNOS',         s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Visual mode selection when vim is "Not Owning the Selection"
+call starter#colors#hi('Pmenu',             s:c.BrightWhite,   s:c.White,        'none')        " Popup menu: normal item
+call starter#colors#hi('PmenuSbar',         s:c.Black,         s:c.BrightBlack,  'none')        " Popup menu: scrollbar
+call starter#colors#hi('PmenuSel',          s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Popup menu: selected item
+call starter#colors#hi('PmenuThumb',        s:c.NONE,          s:c.Black,        'none')        " Popup menu: scrollbar thumb
+call starter#colors#hi('PmenuKind',         s:c.BrightCyan,    s:c.White,        'none')        " Popup menu: normal item "kind"
+call starter#colors#hi('PmenuKindSel',      s:c.BrightCyan,    s:c.BrightBlack,  'bold')        " Popup menu: selected item "kind"
+call starter#colors#hi('PmenuExtra',        s:c.BrightBlack,   s:c.White,        'none')        " Popup menu: normal item "extra text"
+call starter#colors#hi('PmenuExtraSel',     s:c.Black,         s:c.BrightBlack,  'bold')        " Popup menu: selected item "extra text"
+call starter#colors#hi('PmenuMatch',        s:c.BrightYellow,  s:c.White,        'none')        " Popup menu: matched text in normal item
+call starter#colors#hi('PmenuMatchSel',     s:c.BrightYellow,  s:c.BrightBlack,  'bold')        " Popup menu: matched text in selected item
+call starter#colors#hi('PmenuBorder',       s:c.Black,         s:c.White,        'none')        " Popup menu: border characters
 call starter#colors#hi('PmenuShadow',       s:c.NONE,          s:c.White,        'none')        " Popup menu: shadow
 call starter#colors#hi('ComplMatchIns',     s:c.BrightYellow,  s:c.NONE,         'underline')   " Matched text of the currently inserted completion
 call starter#colors#hi('PreInsert',         s:c.BrightBlack,   s:c.NONE,         'none')        " Text inserted when "preinsert" is in 'completeopt'
-call starter#colors#hi('PopupSelected',     s:c.BrightWhite,   s:c.White,        'bold')        " Popup window created with popup_menu()
+call starter#colors#hi('PopupSelected',     s:c.BrightWhite,   s:c.BrightBlack,  'bold')        " Popup window created with popup_menu()
 call starter#colors#hi('PopupNotification', s:c.BrightYellow,  s:c.NONE,         'none')        " Popup window created with popup_notification()
-call starter#colors#hi('FoldColumn',        s:c.White,         s:c.NONE,         'none')        " 'foldcolumn' indicator column
+call starter#colors#hi('FoldColumn',        s:c.Black,         s:c.NONE,         'none')        " 'foldcolumn' indicator column
 call starter#colors#hi('Folded',            s:c.BrightBlue,    s:c.NONE,         'none')        " Line used for closed folds
 call starter#colors#hi('WildMenu',          s:c.BrightWhite,   s:c.White,        'none')        " Current match in 'wildmenu' completion
 call starter#colors#hi('SpecialKey',        s:c.White,         s:c.NONE,         'none')        " Unprintable characters: text displayed differently from what it is
-call starter#colors#hi('IncSearch',         s:c.Black,         s:c.Red,          'none')        " 'incsearch' highlighting; also for replaced text with :s///c
-call starter#colors#hi('CurSearch',         s:c.Black,         s:c.Yellow,       'none')        " Current search match under cursor
-call starter#colors#hi('Search',            s:c.Black,         s:c.BrightYellow, 'none')        " Last search pattern highlighting
+
+call starter#colors#hi('IncSearch',         s:c.White,         s:c.Red,          'none')        " 'incsearch' highlighting; also for replaced text with :s///c
+call starter#colors#hi('CurSearch',         s:c.White,         s:c.Yellow,       'none')        " Current search match under cursor
+call starter#colors#hi('Search',            s:c.White,         s:c.BrightYellow, 'none')        " Last search pattern highlighting
 call starter#colors#hi('Directory',         s:c.NONE,          s:c.NONE,         'none')        " Directory names in listings and other special names
-call starter#colors#hi('MatchParen',        s:c.Yellow,        s:c.Black,        'underline')   " Matching parenthesis/bracket under cursor and its match
+call starter#colors#hi('MatchParen',        s:c.Yellow,        s:c.White,        'underline')   " Matching parenthesis/bracket under cursor and its match
 call starter#colors#hi('MessageWindow',     s:c.BrightYellow,  s:c.NONE,         'none')        " Messages popup window used by :echowindow
-call starter#colors#hi('ModeMsg',           s:c.Black,         s:c.White,        'bold')        " 'showmode' message (e.g. -- INSERT --)
+call starter#colors#hi('ModeMsg',           s:c.White,         s:c.BrightWhite,  'bold')        " 'showmode' message (e.g. -- INSERT --)
 call starter#colors#hi('MsgArea',           s:c.NONE,          s:c.NONE,         'none')        " Command-line area
 call starter#colors#hi('MoreMsg',           s:c.Blue,          s:c.NONE,         'none')        " 'more-prompt' (-- More --)
 call starter#colors#hi('Question',          s:c.Blue,          s:c.NONE,         'none')        " Hit-enter prompt and yes/no questions
-call starter#colors#hi('ColorColumn',       s:c.NONE,          s:c.BrightBlack,  'none')        " Columns set with 'colorcolumn'
-call starter#colors#hi('SignColumn',        s:c.White,         s:c.NONE,         'none')        " Column where signs are displayed
-call starter#colors#hi('QuickFixLine',      s:c.BrightCyan,    s:c.BrightBlack,  'none')        " Current quickfix item in the quickfix window
+call starter#colors#hi('ColorColumn',       s:c.NONE,          s:c.NONE,         'none')        " Columns set with 'colorcolumn'
+call starter#colors#hi('SignColumn',        s:c.Black,         s:c.NONE,         'none')        " Column where signs are displayed
+call starter#colors#hi('QuickFixLine',      s:c.BrightCyan,    s:c.White,        'none')        " Current quickfix item in the quickfix window
 call starter#colors#hi('Conceal',           s:c.BrightBlack,   s:c.NONE,         'none')        " Placeholder characters for concealed text
-call starter#colors#hi('ToolbarLine',       s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Toolbar background
-call starter#colors#hi('ToolbarButton',     s:c.BrightWhite,   s:c.White,        'none')        " Toolbar buttons
-call starter#colors#hi('debugPC',           s:c.BrightWhite,   s:c.NONE,         'none')        " Current line in :terminal debugger
+call starter#colors#hi('ToolbarLine',       s:c.BrightWhite,   s:c.White,        'none')        " Toolbar background
+call starter#colors#hi('ToolbarButton',     s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Toolbar buttons
+call starter#colors#hi('debugPC',           s:c.Black,         s:c.NONE,         'none')        " Current line in :terminal debugger
 call starter#colors#hi('debugBreakpoint',   s:c.BrightBlack,   s:c.NONE,         'none')        " Breakpoint marker in :terminal debugger
 call starter#colors#hi('ErrorMsg',          s:c.Red,           s:c.NONE,         'bold,italic') " Error messages on the command line
 call starter#colors#hi('WarningMsg',        s:c.BrightYellow,  s:c.NONE,         'none')        " Warning messages
-call starter#colors#hi('DiffAdd',           s:c.BrightWhite,   s:c.BrightGreen,  'none')        " Diff mode: added line
-call starter#colors#hi('DiffChange',        s:c.BrightWhite,   s:c.BrightBlue,   'none')        " Diff mode: changed line
-call starter#colors#hi('DiffDelete',        s:c.BrightWhite,   s:c.BrightRed,    'none')        " Diff mode: deleted line
-call starter#colors#hi('DiffText',          s:c.BrightWhite,   s:c.BrightCyan,   'none')        " Diff mode: changed text within a changed line
-call starter#colors#hi('DiffTextAdd',       s:c.BrightWhite,   s:c.BrightCyan,   'none')        " Diff mode: added text within a changed line
+call starter#colors#hi('DiffAdd',           s:c.White,         s:c.BrightGreen,  'none')        " Diff mode: added line
+call starter#colors#hi('DiffChange',        s:c.White,         s:c.BrightBlue,   'none')        " Diff mode: changed line
+call starter#colors#hi('DiffDelete',        s:c.White,         s:c.BrightRed,    'none')        " Diff mode: deleted line
+call starter#colors#hi('DiffText',          s:c.White,         s:c.BrightCyan,   'none')        " Diff mode: changed text within a changed line
+call starter#colors#hi('DiffTextAdd',       s:c.White,         s:c.BrightCyan,   'none')        " Diff mode: added text within a changed line
 call starter#colors#hi('diffAdded',         s:c.BrightGreen,   s:c.NONE,         'none')        " Diff syntax: added line
 call starter#colors#hi('diffRemoved',       s:c.BrightRed,     s:c.NONE,         'none')        " Diff syntax: removed line
 call starter#colors#hi('diffChanged',       s:c.BrightBlue,    s:c.NONE,         'none')        " Diff syntax: changed line
 call starter#colors#hi('diffOldFile',       s:c.BrightYellow,  s:c.NONE,         'none')        " Diff syntax: old file name
 call starter#colors#hi('diffNewFile',       s:c.BrightMagenta, s:c.NONE,         'none')        " Diff syntax: new file name
 call starter#colors#hi('diffFile',          s:c.BrightBlue,    s:c.NONE,         'none')        " Diff syntax: file header
-call starter#colors#hi('diffLine',          s:c.White,         s:c.NONE,         'none')        " Diff syntax: line info (@@...@@)
+call starter#colors#hi('diffLine',          s:c.Black,         s:c.NONE,         'none')        " Diff syntax: line info (@@...@@)
 call starter#colors#hi('diffIndexLine',     s:c.BrightCyan,    s:c.NONE,         'none')        " Diff syntax: index line
 call starter#colors#hi('healthError',       s:c.Red,           s:c.NONE,         'none')        " :checkhealth error
 call starter#colors#hi('healthSuccess',     s:c.Green,         s:c.NONE,         'none')        " :checkhealth success
@@ -175,7 +177,7 @@ call starter#colors#hi('Removed',           s:c.NONE,          s:c.NONE,        
 
 " Neovim-specific
 if has('nvim')
-  call starter#colors#hi('NormalFloat',       s:c.BrightWhite,   s:c.BrightBlack,  'none')        " Normal text in floating windows
-  call starter#colors#hi('FloatBorder',       s:c.White,         s:c.BrightBlack,  'none')        " Border of floating windows
+  call starter#colors#hi('NormalFloat',       s:c.BrightWhite,   s:c.White,        'none')        " Normal text in floating windows
+  call starter#colors#hi('FloatBorder',       s:c.Black,         s:c.White,        'none')        " Border of floating windows
   call starter#colors#hi('FloatShadow',       s:c.BrightWhite,   s:c.White,        'none')        " Shadow behind floating windows
 endif

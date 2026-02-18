@@ -12,7 +12,7 @@
 "
 " Dark colormap options:
 "   tango, gruvbox_dark, solarized_dark, nord, dracula,
-"   tokyo_night, catppuccin_mocha, one_dark
+"   tokyo_night, catppuccin_mocha, one_dark, dark, light
 
 hi clear
 
@@ -24,11 +24,12 @@ set background=dark
 
 let g:colors_name = 'starter-dark'
 
+set termguicolors
+
 if exists('g:term_colormap')
   let s:selectedColorMap = g:term_colormap
-  set termguicolors
 else
-  let s:selectedColorMap = 'tango'
+  let s:selectedColorMap = 'dark'
 endif
 
 let s:c = starter#colors#load(s:selectedColorMap)

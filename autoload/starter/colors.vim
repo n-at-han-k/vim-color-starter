@@ -5,6 +5,44 @@
 
 let s:colormaps = {}
 
+let s:colormaps.light = {
+  \ 'Black':         '#000000',
+  \ 'Red':           '#cc0000',
+  \ 'Green':         '#4e9a06',
+  \ 'Yellow':        '#c4a000',
+  \ 'Blue':          '#3465a4',
+  \ 'Magenta':       '#75507b',
+  \ 'Cyan':          '#06989a',
+  \ 'White':         '#eeeeee',
+  \ 'BrightBlack':   '#888888',
+  \ 'BrightRed':     '#ef2929',
+  \ 'BrightGreen':   '#8ae234',
+  \ 'BrightYellow':  '#fce94f',
+  \ 'BrightBlue':    '#729fcf',
+  \ 'BrightMagenta': '#ad7fa8',
+  \ 'BrightCyan':    '#34e2e2',
+  \ 'BrightWhite':   '#FFFFFF',
+  \ }
+
+let s:colormaps.dark = {
+  \ 'Black':         '#000000',
+  \ 'Red':           '#cc0000',
+  \ 'Green':         '#4e9a06',
+  \ 'Yellow':        '#c4a000',
+  \ 'Blue':          '#3465a4',
+  \ 'Magenta':       '#75507b',
+  \ 'Cyan':          '#06989a',
+  \ 'White':         '#d3d7cf',
+  \ 'BrightBlack':   '#555753',
+  \ 'BrightRed':     '#ef2929',
+  \ 'BrightGreen':   '#8ae234',
+  \ 'BrightYellow':  '#fce94f',
+  \ 'BrightBlue':    '#729fcf',
+  \ 'BrightMagenta': '#ad7fa8',
+  \ 'BrightCyan':    '#34e2e2',
+  \ 'BrightWhite':   '#eeeeec',
+  \ }
+
 let s:colormaps.tango = {
   \ 'Black':         '#000000',
   \ 'Red':           '#cc0000',
