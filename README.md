@@ -1,5 +1,7 @@
 # vim-color-starter
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/n-at-han-k/vim-color-starter)
+
 The simplest, easiest Vim/Neovim colorscheme in the world to customize. Use it as a template -- enable or disable any highlight group you want, using either your terminal's native colors or a custom color palette of your choice. Ships with `starter-dark` and `starter-light` variants built on swappable 16-color palettes.
 
 ## Install
